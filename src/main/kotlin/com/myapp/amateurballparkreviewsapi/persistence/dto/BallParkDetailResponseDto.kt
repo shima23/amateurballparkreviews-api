@@ -8,6 +8,7 @@ data class BallParkDetailResponseDto(
     val rating: String,
     val count: Int,
     val residence: String,
+    // GoogleMapのURL
     val googleMapUrl: String,
     val grassType: Int,
     val groundType: Int
