@@ -1,7 +1,7 @@
 package com.myapp.amateurballparkreviewsapi.domain.factory
 
 import com.myapp.amateurballparkreviewsapi.domain.model.Ballpark
-import com.myapp.amateurballparkreviewsapi.persistence.dto.BallParkDetailResponseDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.BallParkDetailResponseDto
 import org.springframework.stereotype.Component
 import com.myapp.amateurballparkreviewsapi.persistence.entity.BallparkEntity
 import com.myapp.amateurballparkreviewsapi.persistence.entity.ReviewDetailEntity

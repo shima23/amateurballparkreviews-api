@@ -1,9 +1,9 @@
-package com.myapp.amateurballparkreviewsapi.presentation
+package com.myapp.amateurballparkreviewsapi.presentation.api
 
 import com.myapp.amateurballparkreviewsapi.domain.model.Ballpark
 import com.myapp.amateurballparkreviewsapi.domain.service.BallparkService
-import com.myapp.amateurballparkreviewsapi.persistence.dto.BallParkDetailResponseDto
-import com.myapp.amateurballparkreviewsapi.persistence.dto.BallparkSearchRequestDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.BallParkDetailResponseDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.BallparkSearchRequestDto
 import org.springframework.web.bind.annotation.*
 
 @RestController

@@ -1,4 +1,4 @@
-package com.myapp.amateurballparkreviewsapi.persistence.dto
+package com.myapp.amateurballparkreviewsapi.presentation.dto
 
 data class BallparkSearchRequestDto(
     var name: String = "",

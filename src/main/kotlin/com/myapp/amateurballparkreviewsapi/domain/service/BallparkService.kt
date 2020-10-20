@@ -2,8 +2,8 @@ package com.myapp.amateurballparkreviewsapi.domain.service
 
 import com.myapp.amateurballparkreviewsapi.domain.model.Ballpark
 import com.myapp.amateurballparkreviewsapi.domain.repository.BallparkRepository
-import com.myapp.amateurballparkreviewsapi.persistence.dto.BallParkDetailResponseDto
-import com.myapp.amateurballparkreviewsapi.persistence.dto.BallparkSearchRequestDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.BallParkDetailResponseDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.BallparkSearchRequestDto
 import org.springframework.stereotype.Service
 
 @Service
