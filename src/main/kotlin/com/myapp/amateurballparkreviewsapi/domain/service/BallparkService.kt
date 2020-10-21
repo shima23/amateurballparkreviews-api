@@ -2,7 +2,7 @@ package com.myapp.amateurballparkreviewsapi.domain.service
 
 import com.myapp.amateurballparkreviewsapi.domain.model.Ballpark
 import com.myapp.amateurballparkreviewsapi.domain.repository.BallparkRepository
-import com.myapp.amateurballparkreviewsapi.presentation.dto.BallParkDetailResponseDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.BallparkDetailResponseDto
 import com.myapp.amateurballparkreviewsapi.presentation.dto.BallparkSearchRequestDto
 import org.springframework.stereotype.Service
 
@@ -20,7 +20,7 @@ class BallparkService(private val ballparkRepository: BallparkRepository) {
     }
 
     /** 詳細取得 */
-    fun getBallparkDetail(id: Int): BallParkDetailResponseDto {
+    fun getBallparkDetail(id: Int): BallparkDetailResponseDto {
         return ballparkRepository.findById(id)
     }
 }

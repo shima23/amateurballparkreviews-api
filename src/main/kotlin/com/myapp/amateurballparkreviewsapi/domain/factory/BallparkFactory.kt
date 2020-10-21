@@ -1,7 +1,7 @@
 package com.myapp.amateurballparkreviewsapi.domain.factory
 
 import com.myapp.amateurballparkreviewsapi.domain.model.Ballpark
-import com.myapp.amateurballparkreviewsapi.presentation.dto.BallParkDetailResponseDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.BallparkDetailResponseDto
 import org.springframework.stereotype.Component
 import com.myapp.amateurballparkreviewsapi.persistence.entity.BallparkEntity
 import com.myapp.amateurballparkreviewsapi.persistence.entity.ReviewDetailEntity
@@ -21,8 +21,8 @@ class BallparkFactory {
         )
     }
 
-    fun createBallparkDetailFromEntity(entity: BallparkEntity): BallParkDetailResponseDto {
-        return BallParkDetailResponseDto(
+    fun createBallparkDetailFromEntity(entity: BallparkEntity): BallparkDetailResponseDto {
+        return BallparkDetailResponseDto(
             entity.id!!,
             entity.name!!,
             entity.prefectures!!,

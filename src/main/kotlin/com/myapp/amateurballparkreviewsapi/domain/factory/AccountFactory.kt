@@ -1,9 +1,13 @@
 package com.myapp.amateurballparkreviewsapi.domain.factory
 
+import com.myapp.amateurballparkreviewsapi.common.util.AccessKeyUtils
+import com.myapp.amateurballparkreviewsapi.common.util.EncryptUtils
 import com.myapp.amateurballparkreviewsapi.domain.model.Account
+import com.myapp.amateurballparkreviewsapi.persistence.entity.AccountEntity
 import com.myapp.amateurballparkreviewsapi.presentation.dto.AccountRegisterRequestDto
+import org.joda.time.DateTime
 import org.springframework.stereotype.Component
-import java.security.MessageDigest
+import java.sql.Timestamp
 import java.util.*
 
 @Component
@@ -13,17 +17,13 @@ class AccountFactory  {
             id = null,
             mailAddress = reqDto.mailAddress,
             nickname = reqDto.nickname,
-            encrypt_password = encrypt(tempPassword),
+            encrypt_password = EncryptUtils.encrypt(tempPassword),
+            accessKey = null,
             profileImg = null,
-            createdAt = Date()
+            profileText = null,
+            createdAt = Timestamp(System.currentTimeMillis()),
+            updatedAt = Timestamp(System.currentTimeMillis())
         )
     }
 
-    private fun encrypt(password: String): String {
-        return MessageDigest.getInstance("SHA-512")
-            .digest(password.toByteArray())
-            .joinToString("") {
-                "%02x".format(it)
-            }
-    }
 }

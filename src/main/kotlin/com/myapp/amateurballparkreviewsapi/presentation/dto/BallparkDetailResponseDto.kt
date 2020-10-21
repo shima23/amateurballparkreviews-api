@@ -1,6 +1,6 @@
 package com.myapp.amateurballparkreviewsapi.presentation.dto
 
-data class BallParkDetailResponseDto(
+data class BallparkDetailResponseDto(
     var id: Int,
     // 球場名
     var name: String,

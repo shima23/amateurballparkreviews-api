@@ -14,9 +14,12 @@ class AccountService(private val accountRepository: AccountRepository,
                      private val accountFactory: AccountFactory) {
 
     fun registerAccount(reqDto: AccountRegisterRequestDto): AccountResponseDto {
+        // メールアドレス重複チェック
+        if (accountRepository.findByMailAddress(reqDto.mailAddress) != null) {
+            throw Exception()
+        }
         val tempPassword = generateTempPassword()
         val account = accountFactory.createAccountForEntity(reqDto, tempPassword)
-
         val entity = accountRepository.registerAccount(account)
 
         //TODO:SendGridメール送信
@@ -26,8 +29,11 @@ class AccountService(private val accountRepository: AccountRepository,
             entity.mailAddress!!,
             entity.nickname!!,
             entity.encryptPassword!!,
+            entity.accessKey,
             entity.profileImg,
-            entity.createdAt!!
+            entity.profileText,
+            entity.createdAt!!,
+            entity.updatedAt!!
         ))
     }
 

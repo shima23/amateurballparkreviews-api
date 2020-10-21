@@ -2,7 +2,7 @@ package com.myapp.amateurballparkreviewsapi.presentation.api
 
 import com.myapp.amateurballparkreviewsapi.domain.model.Ballpark
 import com.myapp.amateurballparkreviewsapi.domain.service.BallparkService
-import com.myapp.amateurballparkreviewsapi.presentation.dto.BallParkDetailResponseDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.BallparkDetailResponseDto
 import com.myapp.amateurballparkreviewsapi.presentation.dto.BallparkSearchRequestDto
 import org.springframework.web.bind.annotation.*
 
@@ -23,7 +23,7 @@ class BallparkApi(private val ballparkService: BallparkService) {
 
     @CrossOrigin
     @GetMapping("/{id}")
-    fun getBallparkDetail(@PathVariable id: Int): BallParkDetailResponseDto {
+    fun getBallparkDetail(@PathVariable id: Int): BallparkDetailResponseDto {
         return ballparkService.getBallparkDetail(id)
     }
 

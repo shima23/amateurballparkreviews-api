@@ -2,7 +2,7 @@ package com.myapp.amateurballparkreviewsapi.domain.repository
 
 import com.myapp.amateurballparkreviewsapi.domain.factory.BallparkFactory
 import com.myapp.amateurballparkreviewsapi.domain.model.Ballpark
-import com.myapp.amateurballparkreviewsapi.presentation.dto.BallParkDetailResponseDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.BallparkDetailResponseDto
 import com.myapp.amateurballparkreviewsapi.presentation.dto.BallparkSearchRequestDto
 import com.myapp.amateurballparkreviewsapi.persistence.entity.BallparkEntity
 import org.springframework.stereotype.Repository
@@ -28,7 +28,7 @@ class BallparkRepository(private val entityRepository: BallparkEntityRepository)
         return ballparkList
     }
 
-    fun findById(id: Int): BallParkDetailResponseDto {
+    fun findById(id: Int): BallparkDetailResponseDto {
         val ballpark = entityRepository.findById(id).get()
         return BallparkFactory().createBallparkDetailFromEntity(ballpark)
     }
