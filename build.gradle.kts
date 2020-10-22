@@ -24,6 +24,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	implementation("joda-time:joda-time:2.10.6")
+	implementation("com.sendgrid:sendgrid-java:4.6.1")
 	runtimeOnly("org.postgresql:postgresql")
 //	implementation("org.springframework.boot:spring-boot-starter-security")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
