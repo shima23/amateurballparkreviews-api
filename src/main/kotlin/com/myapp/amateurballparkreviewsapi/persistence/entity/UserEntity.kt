@@ -1,14 +1,12 @@
 package com.myapp.amateurballparkreviewsapi.persistence.entity
 
-import com.myapp.amateurballparkreviewsapi.domain.model.Account
-import org.joda.time.DateTime
+import com.myapp.amateurballparkreviewsapi.domain.model.User
 import java.sql.Timestamp
-import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "EX_ACCOUNT")
-data class AccountEntity(
+@Table(name = "EX_USER")
+data class UserEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -39,14 +37,14 @@ data class AccountEntity(
     var updatedAt: Timestamp? = null
 
 ) {
-    constructor(account: Account) : this(
-        mailAddress = account.mailAddress,
-        nickname = account.nickname,
-        encryptPassword = account.encrypt_password,
-        accessKey = account.accessKey,
-        profileImg = account.profileImg,
-        profileText = account.profileText,
-        createdAt = account.createdAt,
-        updatedAt = account.updatedAt
+    constructor(user: User) : this(
+        mailAddress = user.mailAddress,
+        nickname = user.nickname,
+        encryptPassword = user.encrypt_password,
+        accessKey = user.accessKey,
+        profileImg = user.profileImg,
+        profileText = user.profileText,
+        createdAt = user.createdAt,
+        updatedAt = user.updatedAt
     )
 }

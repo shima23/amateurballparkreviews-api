@@ -7,9 +7,9 @@ object AccessKeyUtils {
 
     private const val AUTH_FIX_KEY = "abr"
 
-    fun create(accountId: Int): String {
+    fun create(userId: Int): String {
         val now = DateTime.now()
-        val strAccessKey = accountId.toString() + now + AUTH_FIX_KEY
+        val strAccessKey = userId.toString() + now + AUTH_FIX_KEY
         return  MessageDigest.getInstance("SHA-512")
             .digest(strAccessKey.toByteArray())
             .joinToString("") {

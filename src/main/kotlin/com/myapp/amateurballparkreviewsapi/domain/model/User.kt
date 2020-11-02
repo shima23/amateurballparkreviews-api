@@ -3,7 +3,7 @@ package com.myapp.amateurballparkreviewsapi.domain.model
 import org.joda.time.DateTime
 import java.sql.Timestamp
 
-data class Account(
+data class User(
     var id: Int?,
     var mailAddress: String,
     var nickname: String,

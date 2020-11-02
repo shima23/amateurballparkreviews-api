@@ -1,22 +1,19 @@
 package com.myapp.amateurballparkreviewsapi.domain.repository
 
 import com.myapp.amateurballparkreviewsapi.common.util.AccessKeyUtils
-import com.myapp.amateurballparkreviewsapi.domain.model.Account
-import com.myapp.amateurballparkreviewsapi.persistence.entity.AccountEntity
-import com.myapp.amateurballparkreviewsapi.persistence.repository.AccountEntityRepository
-import javassist.NotFoundException
-import org.joda.time.DateTime
+import com.myapp.amateurballparkreviewsapi.domain.model.User
+import com.myapp.amateurballparkreviewsapi.persistence.entity.UserEntity
+import com.myapp.amateurballparkreviewsapi.persistence.repository.UserEntityRepository
 import org.springframework.stereotype.Repository
-import java.sql.Timestamp
 
 @Repository
-class AccountRepository(private val entityRepository: AccountEntityRepository) {
+class UserRepository(private val entityRepository: UserEntityRepository) {
 
-    fun findById(id: Int): AccountEntity {
+    fun findById(id: Int): UserEntity {
         return entityRepository.findById(id).get()
     }
 
-    fun findByMailAddress(mailAddress: String): AccountEntity? {
+    fun findByMailAddress(mailAddress: String): UserEntity? {
         return entityRepository.findByMailAddress(mailAddress)
     }
 
@@ -30,13 +27,13 @@ class AccountRepository(private val entityRepository: AccountEntityRepository) {
         return newAccessKey
     }
 
-    fun registerAccount(account: Account): AccountEntity {
-        val entity = AccountEntity(account)
+    fun registerUser(user: User): UserEntity {
+        val entity = UserEntity(user)
         return entityRepository.save(entity)
     }
 
-    fun changePassword(accountId: Int, newPassword: String): AccountEntity {
-        val entity = entityRepository.findById(accountId).get()
+    fun changePassword(userId: Int, newPassword: String): UserEntity {
+        val entity = entityRepository.findById(userId).get()
         entity.apply {
             encryptPassword = newPassword
         }

@@ -1,6 +1,6 @@
 package com.myapp.amateurballparkreviewsapi.presentation.dto
 
-data class AccountRegisterRequestDto(
+data class UserRegisterRequestDto(
     val mailAddress: String,
     val nickname: String
 )

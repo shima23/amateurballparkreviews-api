@@ -2,12 +2,12 @@ package com.myapp.amateurballparkreviewsapi.domain.service
 
 import com.myapp.amateurballparkreviewsapi.common.util.EncryptUtils
 import com.myapp.amateurballparkreviewsapi.common.util.SendMailUtils
-import com.myapp.amateurballparkreviewsapi.domain.factory.AccountFactory
-import com.myapp.amateurballparkreviewsapi.domain.model.Account
-import com.myapp.amateurballparkreviewsapi.domain.repository.AccountRepository
-import com.myapp.amateurballparkreviewsapi.persistence.entity.AccountEntity
-import com.myapp.amateurballparkreviewsapi.presentation.dto.AccountRegisterRequestDto
-import com.myapp.amateurballparkreviewsapi.presentation.dto.AccountResponseDto
+import com.myapp.amateurballparkreviewsapi.domain.factory.UserFactory
+import com.myapp.amateurballparkreviewsapi.domain.model.User
+import com.myapp.amateurballparkreviewsapi.domain.repository.UserRepository
+import com.myapp.amateurballparkreviewsapi.persistence.entity.UserEntity
+import com.myapp.amateurballparkreviewsapi.presentation.dto.UserRegisterRequestDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.UserResponseDto
 import com.myapp.amateurballparkreviewsapi.presentation.dto.ChangePasswordRequestDto
 import com.sendgrid.Method
 import com.sendgrid.Request
@@ -20,14 +20,14 @@ import java.security.SecureRandom
 import kotlin.streams.asSequence
 
 @Service
-class AccountService(private val accountRepository: AccountRepository,
-                     private val accountFactory: AccountFactory,
-                     private val sendMailUtils: SendMailUtils) {
+class UserService(private val userRepository: UserRepository,
+                  private val userFactory: UserFactory,
+                  private val sendMailUtils: SendMailUtils) {
 
-    @Value("\${account.register.template.id:#{null}}")
+    @Value("\${user.register.template.id:#{null}}")
     private var registerTemplateId: String? = null
 
-    @Value("\${account.change.password.template.id:#{null}}")
+    @Value("\${user.change.password.template.id:#{null}}")
     private var changePasswordTemplateId: String? = null
 
     @Value("\${abl.from.address:#{null}}")
@@ -36,33 +36,33 @@ class AccountService(private val accountRepository: AccountRepository,
     @Value("\${abl.login.url:#{null}}")
     private var loginUrl: String? = null
 
-    fun registerAccount(reqDto: AccountRegisterRequestDto): AccountResponseDto {
+    fun registerUser(reqDto: UserRegisterRequestDto): UserResponseDto {
         // メールアドレス重複チェック
-        if (accountRepository.findByMailAddress(reqDto.mailAddress) != null) {
+        if (userRepository.findByMailAddress(reqDto.mailAddress) != null) {
             throw Exception()
         }
         val tempPassword = generateTempPassword()
-        val account = accountFactory.createAccountForEntity(reqDto, tempPassword)
-        val entity = accountRepository.registerAccount(account)
+        val user = userFactory.createUserForEntity(reqDto, tempPassword)
+        val entity = userRepository.registerUser(user)
 
-        // アカウント登録完了メール送信
-        sendMailUtils.sendTemplateMail(createAccountNotifyMail(tempPassword, reqDto))
-        return createAccountResponseDto(entity)
+        // ユーザー登録完了メール送信
+        sendMailUtils.sendTemplateMail(createUserNotifyMail(tempPassword, reqDto))
+        return createUserResponseDto(entity)
     }
 
-    fun changePassword(reqDto: ChangePasswordRequestDto): AccountResponseDto {
+    fun changePassword(reqDto: ChangePasswordRequestDto): UserResponseDto {
 
-        if (accountRepository.findById(reqDto.accountId).encryptPassword
+        if (userRepository.findById(reqDto.userId).encryptPassword
             != EncryptUtils.encrypt(reqDto.oldPassword)) {
             throw Exception()
         }
 
         val encryptNewPassword = EncryptUtils.encrypt(reqDto.newPassword)
-        val entity = accountRepository.changePassword(reqDto.accountId, encryptNewPassword)
+        val entity = userRepository.changePassword(reqDto.userId, encryptNewPassword)
 
         // パスワード変更完了メール送信
         sendMailUtils.sendTemplateMail(createChangePasswordMail(entity.mailAddress!!, entity.nickname!!))
-        return createAccountResponseDto(entity)
+        return createUserResponseDto(entity)
     }
 
     private fun generateTempPassword(): String {
@@ -73,8 +73,8 @@ class AccountService(private val accountRepository: AccountRepository,
             .joinToString("")
     }
 
-    private fun createAccountResponseDto(entity: AccountEntity): AccountResponseDto {
-        return AccountResponseDto(Account(
+    private fun createUserResponseDto(entity: UserEntity): UserResponseDto {
+        return UserResponseDto(User(
             entity.id,
             entity.mailAddress!!,
             entity.nickname!!,
@@ -87,7 +87,7 @@ class AccountService(private val accountRepository: AccountRepository,
         ))
     }
 
-    private fun createAccountNotifyMail(tempPassword: String, reqDto: AccountRegisterRequestDto): Request {
+    private fun createUserNotifyMail(tempPassword: String, reqDto: UserRegisterRequestDto): Request {
         val mail = Mail()
         mail.from = Email(fromAddress)
         mail.subject = "[AmateurBallparkReviews]アカウント登録完了のお知らせ"

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 class LoginApi(private val loginService: LoginService) {
 
     @CrossOrigin
-    @PostMapping("/login")
+    @PostMapping("login")
     fun login(@RequestBody reqDto: LoginRequestDto): LoginResponseDto {
         return loginService.login(reqDto)
     }
