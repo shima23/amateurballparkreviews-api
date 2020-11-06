@@ -26,7 +26,9 @@ dependencies {
 	implementation("joda-time:joda-time:2.10.6")
 	implementation("com.sendgrid:sendgrid-java:4.6.1")
 	runtimeOnly("org.postgresql:postgresql")
-	//implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("com.auth0:java-jwt:3.10.0")
+	implementation("com.google.code.gson:gson:2.8.6")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}

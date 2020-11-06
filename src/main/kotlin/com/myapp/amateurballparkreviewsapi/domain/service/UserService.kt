@@ -1,14 +1,15 @@
 package com.myapp.amateurballparkreviewsapi.domain.service
 
 import com.myapp.amateurballparkreviewsapi.common.util.EncryptUtils
+import com.myapp.amateurballparkreviewsapi.common.util.JWTUtils
 import com.myapp.amateurballparkreviewsapi.common.util.SendMailUtils
 import com.myapp.amateurballparkreviewsapi.domain.factory.UserFactory
 import com.myapp.amateurballparkreviewsapi.domain.model.User
 import com.myapp.amateurballparkreviewsapi.domain.repository.UserRepository
 import com.myapp.amateurballparkreviewsapi.persistence.entity.UserEntity
+import com.myapp.amateurballparkreviewsapi.presentation.dto.ChangePasswordRequestDto
 import com.myapp.amateurballparkreviewsapi.presentation.dto.UserRegisterRequestDto
 import com.myapp.amateurballparkreviewsapi.presentation.dto.UserResponseDto
-import com.myapp.amateurballparkreviewsapi.presentation.dto.ChangePasswordRequestDto
 import com.sendgrid.Method
 import com.sendgrid.Request
 import com.sendgrid.helpers.mail.Mail
@@ -35,6 +36,12 @@ class UserService(private val userRepository: UserRepository,
 
     @Value("\${abl.login.url:#{null}}")
     private var loginUrl: String? = null
+
+    fun getUser(token: String): UserResponseDto {
+        val mailAddress = JWTUtils.decodeTokenToMailAddress(token)
+        val user = userRepository.findByMailAddress(mailAddress) ?: throw Exception()
+        return createUserResponseDto(user)
+    }
 
     fun registerUser(reqDto: UserRegisterRequestDto): UserResponseDto {
         // メールアドレス重複チェック

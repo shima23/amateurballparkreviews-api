@@ -1,6 +1,5 @@
 package com.myapp.amateurballparkreviewsapi.domain.repository
 
-import com.myapp.amateurballparkreviewsapi.common.util.AccessKeyUtils
 import com.myapp.amateurballparkreviewsapi.domain.model.User
 import com.myapp.amateurballparkreviewsapi.persistence.entity.UserEntity
 import com.myapp.amateurballparkreviewsapi.persistence.repository.UserEntityRepository
@@ -15,16 +14,6 @@ class UserRepository(private val entityRepository: UserEntityRepository) {
 
     fun findByMailAddress(mailAddress: String): UserEntity? {
         return entityRepository.findByMailAddress(mailAddress)
-    }
-
-    fun updateAccessKey(mailAddress: String): String {
-        val entity = entityRepository.findByMailAddress(mailAddress) ?: throw Exception()
-        val newAccessKey = AccessKeyUtils.create(entity.id!!)
-        entity.apply {
-            accessKey = newAccessKey
-        }
-        entityRepository.save(entity)
-        return newAccessKey
     }
 
     fun registerUser(user: User): UserEntity {
