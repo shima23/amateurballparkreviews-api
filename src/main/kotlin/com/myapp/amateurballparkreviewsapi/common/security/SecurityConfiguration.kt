@@ -42,7 +42,7 @@ class SecurityConfiguration(private val userRepository: UserRepository) : WebSec
 
     override fun configure(web: WebSecurity) {
         // login時はfilterの処理を行わない
-        web.ignoring().antMatchers("/login")
+        web.ignoring().antMatchers("/login", "/logout")
     }
 
     override fun configure(http: HttpSecurity) {
