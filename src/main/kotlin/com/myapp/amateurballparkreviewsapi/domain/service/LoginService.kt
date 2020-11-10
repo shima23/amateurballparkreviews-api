@@ -14,11 +14,11 @@ class LoginService(private val repository: UserRepository) {
         val entity = repository.findByMailAddress(reqDto.mailAddress) ?: throw Exception()
         // ログイン認証
         return if (entity.encryptPassword == EncryptUtils.encrypt(reqDto.password)) {
-            // アクセスキー更新
+            // トークンを更新
             val token = JWTUtils.createToken(reqDto.mailAddress)
             LoginResponseDto(token)
         } else {
-            LoginResponseDto( "")
+            throw Exception()
         }
     }
 }
