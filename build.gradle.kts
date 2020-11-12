@@ -17,17 +17,23 @@ repositories {
 }
 
 dependencies {
+	// SpringBoot
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	// kotlin
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	implementation("joda-time:joda-time:2.10.6")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	// SendGrid
 	implementation("com.sendgrid:sendgrid-java:4.6.1")
+	// PostgreSQL
 	runtimeOnly("org.postgresql:postgresql")
+	// Spring Security
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	// JWT
 	implementation("com.auth0:java-jwt:3.10.0")
+	// Gson
 	implementation("com.google.code.gson:gson:2.8.6")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

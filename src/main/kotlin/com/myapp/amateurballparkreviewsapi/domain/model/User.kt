@@ -1,6 +1,5 @@
 package com.myapp.amateurballparkreviewsapi.domain.model
 
-import org.joda.time.DateTime
 import java.sql.Timestamp
 
 data class User(
@@ -11,6 +10,6 @@ data class User(
     var accessKey: String?,
     var profileImg: String?,
     var profileText: String?,
-    var createdAt : Timestamp,
-    var updatedAt : Timestamp
+    var createdAt: Timestamp,
+    var updatedAt: Timestamp
 )
