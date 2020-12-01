@@ -21,8 +21,8 @@ class UserRepository(private val entityRepository: UserEntityRepository) {
         return entityRepository.save(entity)
     }
 
-    fun changePassword(userId: Int, newPassword: String): UserEntity {
-        val entity = entityRepository.findById(userId).get()
+    fun changePassword(mailAddress: String, newPassword: String): UserEntity {
+        val entity = entityRepository.findByMailAddress(mailAddress)!!
         entity.apply {
             encryptPassword = newPassword
         }

@@ -57,15 +57,15 @@ class UserService(private val userRepository: UserRepository,
         return createUserResponseDto(entity)
     }
 
-    fun changePassword(reqDto: ChangePasswordRequestDto): UserResponseDto {
+    fun changePassword(mailAddress: String, reqDto: ChangePasswordRequestDto): UserResponseDto {
 
-        if (userRepository.findById(reqDto.userId).encryptPassword
+        if (userRepository.findByMailAddress(mailAddress)!!.encryptPassword
             != EncryptUtils.encrypt(reqDto.oldPassword)) {
             throw Exception()
         }
 
         val encryptNewPassword = EncryptUtils.encrypt(reqDto.newPassword)
-        val entity = userRepository.changePassword(reqDto.userId, encryptNewPassword)
+        val entity = userRepository.changePassword(mailAddress, encryptNewPassword)
 
         // パスワード変更完了メール送信
         sendMailUtils.sendTemplateMail(createChangePasswordMail(entity.mailAddress!!, entity.nickname!!))
