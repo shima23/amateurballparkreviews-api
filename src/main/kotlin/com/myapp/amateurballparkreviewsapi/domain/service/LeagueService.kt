@@ -1,11 +1,13 @@
 package com.myapp.amateurballparkreviewsapi.domain.service
 
 import com.myapp.amateurballparkreviewsapi.domain.factory.LeagueFactory
+import com.myapp.amateurballparkreviewsapi.domain.model.LeagueScore
+import com.myapp.amateurballparkreviewsapi.domain.model.LeagueScoreSummary
 import com.myapp.amateurballparkreviewsapi.domain.repository.LeagueRepository
-import com.myapp.amateurballparkreviewsapi.presentation.dto.LeagueDto
-import com.myapp.amateurballparkreviewsapi.presentation.dto.LeagueRegisterRequestDto
-import com.myapp.amateurballparkreviewsapi.presentation.dto.LeagueRegisterResponseDto
-import com.myapp.amateurballparkreviewsapi.presentation.dto.LeagueScoreRequestDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueRegisterRequestDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueRegisterResponseDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueScoreRequestDto
 import org.springframework.stereotype.Service
 
 @Service
@@ -14,7 +16,9 @@ class LeagueService(private val leagueRepository: LeagueRepository,
 ) {
     fun getLeague(leagueId: Int): LeagueDto {
         val league = leagueRepository.getLeague(leagueId)
-        return LeagueDto(league)
+        val leagueTeam = leagueRepository.getLeagueTeam(leagueId)
+        val leagueScoreList = leagueRepository.getLeagueScore(leagueId)
+        return LeagueDto(league, leagueTeam, createSummaryLeagueScore(leagueScoreList))
     }
 
     fun registerLeague(requestDto: LeagueRegisterRequestDto): LeagueRegisterResponseDto {
@@ -25,5 +29,19 @@ class LeagueService(private val leagueRepository: LeagueRepository,
     fun registerLeagueScoreDto(requestDto: LeagueScoreRequestDto) {
         val leagueScore = leagueFactory.createLeagueScore(requestDto)
         leagueRepository.registerLeagueScore(leagueScore)
+    }
+
+    private fun createSummaryLeagueScore(leagueScoreList: List<LeagueScore>): List<LeagueScoreSummary> {
+        val leagueScoreSummaryList = mutableListOf<LeagueScoreSummary>()
+        val yearList = mutableListOf<Int>()
+        // 登録されているスコアから年度を抽出
+        leagueScoreList.distinctBy { leagueScore -> leagueScore.year }.forEach { yearList.add(it.year!!) }
+        // 年度ごとのSummaryを作成
+        yearList.forEach { year ->
+            val leagueScoreListByYear = leagueScoreList.filter { leagueScore -> leagueScore.year == year }
+            leagueScoreSummaryList.add(LeagueScoreSummary(year, leagueScoreListByYear))
+
+        }
+        return leagueScoreSummaryList
     }
 }

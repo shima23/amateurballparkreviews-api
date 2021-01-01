@@ -2,12 +2,12 @@ package com.myapp.amateurballparkreviewsapi.domain.repository
 
 import com.myapp.amateurballparkreviewsapi.domain.factory.BallparkFactory
 import com.myapp.amateurballparkreviewsapi.domain.model.Ballpark
+import com.myapp.amateurballparkreviewsapi.persistence.entity.BallparkEntity
+import com.myapp.amateurballparkreviewsapi.persistence.repository.BallparkEntityRepository
 import com.myapp.amateurballparkreviewsapi.presentation.dto.BallparkDetailResponseDto
 import com.myapp.amateurballparkreviewsapi.presentation.dto.BallparkSearchRequestDto
-import com.myapp.amateurballparkreviewsapi.persistence.entity.BallparkEntity
-import org.springframework.stereotype.Repository
-import com.myapp.amateurballparkreviewsapi.persistence.repository.BallparkEntityRepository
 import org.springframework.data.jpa.domain.Specification
+import org.springframework.stereotype.Repository
 
 @Repository
 class BallparkRepository(private val entityRepository: BallparkEntityRepository) {
@@ -34,13 +34,13 @@ class BallparkRepository(private val entityRepository: BallparkEntityRepository)
     }
 
     private fun createSpecification(reqDto: BallparkSearchRequestDto): Specification<BallparkEntity> {
-       return Specification { root, query, cb ->
-           cb.or(
-               cb.like(cb.lower(root.get("name")), getContainsLikePattern(reqDto.name)),
-               cb.like(cb.lower(root.get("prefectures")), reqDto.prefectures)
-               //TODO:検索条件を後で追加
-           )
-       }
+        return Specification { root, query, cb ->
+            cb.or(
+                cb.like(cb.lower(root.get("name")), getContainsLikePattern(reqDto.name)),
+                cb.like(cb.lower(root.get("prefectures")), reqDto.prefectures)
+                //TODO:検索条件を後で追加
+            )
+        }
     }
 
     private fun getContainsLikePattern(input: String): String? {

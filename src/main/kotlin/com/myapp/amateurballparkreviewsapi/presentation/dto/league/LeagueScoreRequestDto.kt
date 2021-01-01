@@ -1,4 +1,4 @@
-package com.myapp.amateurballparkreviewsapi.presentation.dto
+package com.myapp.amateurballparkreviewsapi.presentation.dto.league
 
 import com.myapp.amateurballparkreviewsapi.domain.model.Score
 import java.util.*

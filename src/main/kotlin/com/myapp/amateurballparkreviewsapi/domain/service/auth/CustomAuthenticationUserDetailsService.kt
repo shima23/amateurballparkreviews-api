@@ -1,4 +1,4 @@
-package com.myapp.amateurballparkreviewsapi.domain.service
+package com.myapp.amateurballparkreviewsapi.domain.service.auth
 
 import com.myapp.amateurballparkreviewsapi.common.security.UserAuthority
 import com.myapp.amateurballparkreviewsapi.common.util.JWTUtils

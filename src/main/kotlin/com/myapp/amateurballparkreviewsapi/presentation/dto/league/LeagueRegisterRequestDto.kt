@@ -1,4 +1,4 @@
-package com.myapp.amateurballparkreviewsapi.presentation.dto
+package com.myapp.amateurballparkreviewsapi.presentation.dto.league
 
 data class LeagueRegisterRequestDto(
     val leagueName: String,

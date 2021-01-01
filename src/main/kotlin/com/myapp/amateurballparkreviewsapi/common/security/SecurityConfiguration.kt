@@ -1,7 +1,7 @@
 package com.myapp.amateurballparkreviewsapi.common.security
 
 import com.myapp.amateurballparkreviewsapi.domain.repository.UserRepository
-import com.myapp.amateurballparkreviewsapi.domain.service.CustomAuthenticationUserDetailsService
+import com.myapp.amateurballparkreviewsapi.domain.service.auth.CustomAuthenticationUserDetailsService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker

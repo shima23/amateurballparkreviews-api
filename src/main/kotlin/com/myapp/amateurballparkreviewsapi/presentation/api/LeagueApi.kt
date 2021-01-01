@@ -1,10 +1,10 @@
 package com.myapp.amateurballparkreviewsapi.presentation.api
 
 import com.myapp.amateurballparkreviewsapi.domain.service.LeagueService
-import com.myapp.amateurballparkreviewsapi.presentation.dto.LeagueDto
-import com.myapp.amateurballparkreviewsapi.presentation.dto.LeagueRegisterRequestDto
-import com.myapp.amateurballparkreviewsapi.presentation.dto.LeagueRegisterResponseDto
-import com.myapp.amateurballparkreviewsapi.presentation.dto.LeagueScoreRequestDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueRegisterRequestDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueRegisterResponseDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueScoreRequestDto
 import org.springframework.web.bind.annotation.*
 
 @RestController

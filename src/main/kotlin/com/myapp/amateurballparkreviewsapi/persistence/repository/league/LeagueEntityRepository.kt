@@ -1,4 +1,4 @@
-package com.myapp.amateurballparkreviewsapi.persistence.repository
+package com.myapp.amateurballparkreviewsapi.persistence.repository.league
 
 import com.myapp.amateurballparkreviewsapi.persistence.entity.league.LeagueEntity
 import org.springframework.data.jpa.repository.JpaRepository

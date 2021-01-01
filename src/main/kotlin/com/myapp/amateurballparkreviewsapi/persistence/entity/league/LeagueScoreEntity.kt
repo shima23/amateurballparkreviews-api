@@ -32,12 +32,12 @@ data class LeagueScoreEntity(
 
 ) {
     constructor(leagueScore: LeagueScore) : this(
-        leagueScore.id,
-        leagueScore.leagueId,
-        leagueScore.year,
-        leagueScore.homeTeamId,
-        leagueScore.visitorTeamId,
-        leagueScore.score,
-        leagueScore.gameDate
+        id = leagueScore.id,
+        leagueId = leagueScore.leagueId,
+        year = leagueScore.year,
+        homeTeamId = leagueScore.homeTeamId,
+        visitorTeamId = leagueScore.visitorTeamId,
+        score = leagueScore.score,
+        gameDate = leagueScore.gameDate
     )
 }
