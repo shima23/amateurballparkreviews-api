@@ -28,6 +28,10 @@ class LeagueRepository(private val leagueEntityRepository: LeagueEntityRepositor
         return leagueFactory.createLeagueFromEntity(leagueEntityRepository.save(entity))
     }
 
+    fun updateLeague() {
+        
+    }
+
     /** LeagueTeam */
 
     fun getLeagueTeam(leagueId: Int): List<LeagueTeam> {

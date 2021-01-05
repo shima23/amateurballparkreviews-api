@@ -1,10 +1,7 @@
 package com.myapp.amateurballparkreviewsapi.presentation.api
 
 import com.myapp.amateurballparkreviewsapi.domain.service.LeagueService
-import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueDto
-import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueRegisterRequestDto
-import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueRegisterResponseDto
-import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueScoreRequestDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.league.*
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -25,8 +22,8 @@ class LeagueApi(private val leagueService: LeagueService) {
     }
 
     @PutMapping("/league/{id}")
-    fun updateLeague(@PathVariable id: Int) {
-
+    fun updateLeague(@RequestBody requestDto: LeagueUpdateRequestDto) {
+        return leagueService.updateLeague(requestDto)
     }
 
     @PostMapping("/league/score")
