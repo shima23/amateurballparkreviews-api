@@ -24,7 +24,11 @@ data class LeagueEntity(
     var imgUrl2: String? = null,
 
     @Column(name = "IMG_URL3", nullable = true, length = 1000)
-    var imgUrl3: String? = null
+    var imgUrl3: String? = null,
+
+    @Column(name = "DESCRIPTION", nullable = false, columnDefinition = "TEXT")
+    var description: String? = null
+
 ) {
     constructor(league: League) : this(
         league.id,
@@ -32,6 +36,8 @@ data class LeagueEntity(
         league.leagueLogo,
         league.imgUrl1,
         league.imgUrl2,
-        league.imgUrl3
+        league.imgUrl3,
+        league.description
+
     )
 }

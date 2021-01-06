@@ -19,13 +19,13 @@ class LeagueService(private val leagueRepository: LeagueRepository,
     }
 
     fun registerLeague(requestDto: LeagueRegisterRequestDto): LeagueRegisterResponseDto {
-        val league = leagueFactory.createLeague(requestDto)
+        val league = leagueFactory.createLeagueForRegister(requestDto)
         return LeagueRegisterResponseDto(leagueRepository.registerLeague(league).id!!)
     }
 
     fun updateLeague(requestDto: LeagueUpdateRequestDto) {
-        val league = leagueFactory
-        leagueRepository.updateLeague()
+        val league = leagueFactory.createLeagueForUpdate(requestDto)
+        leagueRepository.updateLeague(league)
     }
 
     fun registerLeagueScoreDto(requestDto: LeagueScoreRequestDto) {

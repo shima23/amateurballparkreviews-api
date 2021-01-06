@@ -9,6 +9,7 @@ import com.myapp.amateurballparkreviewsapi.persistence.entity.league.LeagueScore
 import com.myapp.amateurballparkreviewsapi.persistence.entity.league.LeagueTeamEntity
 import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueRegisterRequestDto
 import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueScoreRequestDto
+import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueUpdateRequestDto
 import org.springframework.stereotype.Component
 
 @Component
@@ -20,18 +21,32 @@ class LeagueFactory {
             entity.leagueLogo,
             entity.imgUrl1,
             entity.imgUrl2,
-            entity.imgUrl3
+            entity.imgUrl3,
+            entity.description
         )
     }
 
-    fun createLeague(dto: LeagueRegisterRequestDto): League {
+    fun createLeagueForRegister(dto: LeagueRegisterRequestDto): League {
         return League(
-            null,
-            dto.leagueName,
-            null,
-            null,
-            null,
-            null
+            id = null,
+            leagueName = dto.leagueName,
+            leagueLogo = null,
+            imgUrl1 = null,
+            imgUrl2 = null,
+            imgUrl3 = null,
+            description = null
+        )
+    }
+
+    fun createLeagueForUpdate(dto: LeagueUpdateRequestDto): League {
+        return League(
+            id = dto.id,
+            leagueName = dto.leagueName,
+            leagueLogo = dto.leagueLogo,
+            imgUrl1 = dto.imgUrl1,
+            imgUrl2 = dto.imgUrl2,
+            imgUrl3 = dto.imgUrl3,
+            description = dto.description
         )
     }
 

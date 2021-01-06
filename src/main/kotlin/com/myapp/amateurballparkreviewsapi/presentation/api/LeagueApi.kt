@@ -21,7 +21,7 @@ class LeagueApi(private val leagueService: LeagueService) {
         return leagueService.registerLeague(requestDto)
     }
 
-    @PutMapping("/league/{id}")
+    @PutMapping("/league")
     fun updateLeague(@RequestBody requestDto: LeagueUpdateRequestDto) {
         return leagueService.updateLeague(requestDto)
     }

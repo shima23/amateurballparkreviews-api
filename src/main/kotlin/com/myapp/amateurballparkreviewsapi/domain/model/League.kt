@@ -6,5 +6,6 @@ data class League(
     var leagueLogo: String?,
     var imgUrl1: String?,
     var imgUrl2: String?,
-    var imgUrl3: String?
+    var imgUrl3: String?,
+    var description: String?
 )

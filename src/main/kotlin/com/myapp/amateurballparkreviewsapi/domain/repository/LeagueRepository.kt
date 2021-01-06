@@ -28,8 +28,14 @@ class LeagueRepository(private val leagueEntityRepository: LeagueEntityRepositor
         return leagueFactory.createLeagueFromEntity(leagueEntityRepository.save(entity))
     }
 
-    fun updateLeague() {
-        
+    fun updateLeague(league: League): League {
+        val entity = leagueEntityRepository.findById(league.id!!).get()
+        league.imgUrl1?.let { entity.imgUrl1 = league.imgUrl1 }
+        league.imgUrl2?.let { entity.imgUrl2 = league.imgUrl2 }
+        league.imgUrl3?.let { entity.imgUrl3 = league.imgUrl3 }
+        league.leagueLogo?.let { entity.leagueLogo = league.imgUrl3 }
+        league.description?.let { entity.description = league.description }
+        return leagueFactory.createLeagueFromEntity(leagueEntityRepository.save(entity))
     }
 
     /** LeagueTeam */
