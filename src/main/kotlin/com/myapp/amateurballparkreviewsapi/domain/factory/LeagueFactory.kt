@@ -1,16 +1,19 @@
 package com.myapp.amateurballparkreviewsapi.domain.factory
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.myapp.amateurballparkreviewsapi.domain.model.League
-import com.myapp.amateurballparkreviewsapi.domain.model.LeagueScore
-import com.myapp.amateurballparkreviewsapi.domain.model.LeagueTeam
+import com.myapp.amateurballparkreviewsapi.domain.model.league.League
+import com.myapp.amateurballparkreviewsapi.domain.model.league.LeagueNotice
+import com.myapp.amateurballparkreviewsapi.domain.model.league.LeagueScore
+import com.myapp.amateurballparkreviewsapi.domain.model.league.LeagueTeam
 import com.myapp.amateurballparkreviewsapi.persistence.entity.league.LeagueEntity
+import com.myapp.amateurballparkreviewsapi.persistence.entity.league.LeagueNoticeEntity
 import com.myapp.amateurballparkreviewsapi.persistence.entity.league.LeagueScoreEntity
 import com.myapp.amateurballparkreviewsapi.persistence.entity.league.LeagueTeamEntity
 import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueRegisterRequestDto
 import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueScoreRequestDto
 import com.myapp.amateurballparkreviewsapi.presentation.dto.league.LeagueUpdateRequestDto
 import org.springframework.stereotype.Component
+import java.text.SimpleDateFormat
 
 @Component
 class LeagueFactory {
@@ -79,6 +82,17 @@ class LeagueFactory {
             visitorTeamId = entity.visitorTeamId,
             score = entity.score,
             gameDate = entity.gameDate
+        )
+    }
+
+    fun createdLeagueNoticeFromEntity(entity: LeagueNoticeEntity): LeagueNotice {
+        return LeagueNotice(
+            id = entity.id,
+            leagueId = entity.leagueId,
+            title = entity.title,
+            notice = entity.notice,
+            createdDate = SimpleDateFormat("yyyy-MM-dd").format(entity.createdDate),
+            updatedDate = SimpleDateFormat("yyyy-MM-dd").format(entity.updatedDate)
         )
     }
 }

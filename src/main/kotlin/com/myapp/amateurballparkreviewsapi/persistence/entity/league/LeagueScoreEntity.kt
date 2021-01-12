@@ -1,6 +1,6 @@
 package com.myapp.amateurballparkreviewsapi.persistence.entity.league
 
-import com.myapp.amateurballparkreviewsapi.domain.model.LeagueScore
+import com.myapp.amateurballparkreviewsapi.domain.model.league.LeagueScore
 import java.util.*
 import javax.persistence.*
 

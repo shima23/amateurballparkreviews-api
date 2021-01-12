@@ -1,8 +1,8 @@
 package com.myapp.amateurballparkreviewsapi.domain.service
 
 import com.myapp.amateurballparkreviewsapi.domain.factory.LeagueFactory
-import com.myapp.amateurballparkreviewsapi.domain.model.LeagueScore
-import com.myapp.amateurballparkreviewsapi.domain.model.LeagueScoreSummary
+import com.myapp.amateurballparkreviewsapi.domain.model.league.LeagueScore
+import com.myapp.amateurballparkreviewsapi.domain.model.league.LeagueScoreSummary
 import com.myapp.amateurballparkreviewsapi.domain.repository.LeagueRepository
 import com.myapp.amateurballparkreviewsapi.presentation.dto.league.*
 import org.springframework.stereotype.Service
@@ -14,8 +14,9 @@ class LeagueService(private val leagueRepository: LeagueRepository,
     fun getLeague(leagueId: Int): LeagueDto {
         val league = leagueRepository.getLeague(leagueId)
         val leagueTeam = leagueRepository.getLeagueTeam(leagueId)
-        val leagueScoreList = leagueRepository.getLeagueScore(leagueId)
-        return LeagueDto(league, leagueTeam, createSummaryLeagueScore(leagueScoreList))
+        val leagueScoreSummary = leagueRepository.getLeagueScore(leagueId)
+        val leagueNotice = leagueRepository.getLeagueNotice(leagueId).sortedByDescending { it.updatedDate }
+        return LeagueDto(league, leagueTeam, createSummaryLeagueScore(leagueScoreSummary), leagueNotice)
     }
 
     fun registerLeague(requestDto: LeagueRegisterRequestDto): LeagueRegisterResponseDto {

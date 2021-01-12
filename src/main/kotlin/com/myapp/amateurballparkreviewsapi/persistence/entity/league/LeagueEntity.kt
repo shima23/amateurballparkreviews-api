@@ -1,6 +1,6 @@
 package com.myapp.amateurballparkreviewsapi.persistence.entity.league
 
-import com.myapp.amateurballparkreviewsapi.domain.model.League
+import com.myapp.amateurballparkreviewsapi.domain.model.league.League
 import javax.persistence.*
 
 @Entity

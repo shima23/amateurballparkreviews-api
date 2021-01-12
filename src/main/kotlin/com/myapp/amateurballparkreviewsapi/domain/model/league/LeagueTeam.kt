@@ -1,4 +1,4 @@
-package com.myapp.amateurballparkreviewsapi.domain.model
+package com.myapp.amateurballparkreviewsapi.domain.model.league
 
 data class LeagueTeam(
     val id: Int?,
